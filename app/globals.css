@@ -2,20 +2,113 @@
 @tailwind components;
 @tailwind utilities;
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
+*{
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+  scroll-behavior: smooth;
+}
+.animated-scroll::-webkit-scrollbar{
+  height: 20px;
+  
+}
+.animated-scroll::-webkit-scrollbar-track {
+  box-shadow: inset 0 0 5px grey;
+  border-radius: 10px;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+/* Handle */
+.animated-scroll::-webkit-scrollbar-thumb {
+  @apply bg-gradient-to-b from-btn_blue_s via-btn_blue_m to-btn_blue_s rounded-full
+}
+body {
+  color: white;
+  background: black;
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+
+@layer components{
+  .btn{
+    @apply bg-gradient-to-b from-btn_blue_s via-btn_blue_m to-btn_blue_s rounded md:py-2 py-1 md:px-3 px-2 md:text-lg text-xs hover:border hover:border-border_gray active:border-2 transition-all duration-300 cursor-pointer 
+  }
+  .nav{
+    @apply sticky top-0 w-full h-12 flex justify-between items-center px-6 backdrop-blur-md
+  }
+  .nav-ul{
+    @apply flex md:gap-3 lg:gap-5 sm:gap-3
+  }
+
+  .nav-li{
+    @apply hover:underline cursor-pointer
+  }
+  .hero{
+    @apply  text-wrap h-[80vh] relative flex flex-col w-full
+  }
+  .hero-head{
+    @apply  md:text-[66px] sm:text-[43px] text-[33px] text-hero_head 
+  }
+  .hero-sub-head{
+    @apply  md:text-[42px] sm:text-[34px] text-[26px] text-hero_sub_head
+  }
+  .hero-para{
+    @apply  md:text-[32px] sm:text-[24px] text-[18px] text-hero_p max-w-[500px]
+  }
+  .hero-image{
+    @apply absolute  right-0 bottom-0 min-h-40 -z-10
+  }
+  .section-head{
+    @apply lg:text-[50px] pl-10 md:text-[42px] sm:text-[34px] text-[18px]
+  }
+  .space-c{
+    @apply mt-[60px]
+  }
+  .rounded-img{
+    @apply rounded-md w-full
+  }
+  .featured-card{
+    @apply rounded-md flex flex-col md:flex-row justify-between  md:p-10 p-4 items-start md:items-end
+  }
+  .featured-card-name{
+    @apply md:text-4xl text-2xl text-transparent bg-gradient-to-r bg-clip-text font-semibold from-featured_prod_head_s to-featured_prod_head_e
+  }
+  .featured-card-desc{
+    @apply md:text-lg text-sm
+  }
+  .gray-gradient{
+    @apply bg-gradient-to-tr from-black_grad_s via-black_grad_m to-black_grad_e
+  }
+  .sidebar-inner{
+    @apply  w-full flex justify-evenly items-start gap-2 py-2 h-max
+  }
+}
+@layer utilities{
+
+  .wave-hand{
+    animation-name: wave-hands;
+    animation-duration: 2s;
+    transform-origin: bottom right ;
+    animation-iteration-count: infinite;
+    animation-timing-function: ease-in-out;
+    
   }
 }
 
-body {
-  color: var(--foreground);
-  background: var(--background);
-  font-family: Arial, Helvetica, sans-serif;
+@keyframes wave-hands{
+  0%{
+    transform: rotate(0deg);
+
+  }
+  
+  30%{
+    transform: rotate(30deg);
+  }
+  
+  60%{
+    transform: rotate(0deg);
+  }
+  
+  100%{
+    transform: rotate(0deg);
+  }
 }
