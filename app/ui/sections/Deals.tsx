@@ -13,7 +13,7 @@ const Deals = () => {
             <div className=" max-w-full max-h-fit overflow-x-scroll animated-scroll">
                 
 
-                <div  className={`h-max min-w-full w-max ease-linear  flex gap-3 md:p-10 p-4 transition-transform duration-[170s] `}>
+                <div  className={`h-max min-w-full w-max ease-linear  flex gap-3 md:p-10 p-4 transition-transform duration-150 `}>
                     {products.map((item) => (
                         <div key={item.id} className={` transition-all duration-500`}>
 

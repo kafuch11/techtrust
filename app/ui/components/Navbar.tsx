@@ -28,7 +28,7 @@ const navigationObj = [
 const Navbar = () => {
     const signedIn = false;
   return (
-    <nav   className={`z-50 nav h-[60px] relative   `}>
+    <nav   className={`z-50 nav h-[60px] relative`}>
         <div><Link href={'/'}>
             <Image  src={'/logo/TechTrust.svg'} height={50} width={100} alt="logo" className="md:flex hidden" />
             <Image src={'/logo/logo.svg'} height={34} width={34} alt="logo" className="md:hidden flex"/>
@@ -44,8 +44,8 @@ const Navbar = () => {
             </>
         ):(
             <>
-            <div className="btn ">Sign Up</div>
-            <div className="hover:underline transition-all cursor-pointer">Login</div>
+            <Link href={'/sign-up'}><div className="btn ">Sign Up</div></Link>
+            <Link href={'/sign-in'}><div className="hover:underline transition-all cursor-pointer">Login</div></Link>
         </>
     )
             }</div>
