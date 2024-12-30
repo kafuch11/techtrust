@@ -7,16 +7,20 @@ import { useForm, SubmitHandler } from "react-hook-form"
 
 
 const Rating = () => {
-    const [rated, setRated] = useState(3)
-    const realRating = useRef(0)
-    const [clicked, setClicked] = useState(false)
-    const [btnClicked, setBtnClicked] = useState(false)
-    const { register, handleSubmit, formState:{errors}, reset } = useForm()
+
 
     interface IFormInput {
         email: string;
         
       }
+
+
+    const [rated, setRated] = useState(3)
+    const realRating = useRef(0)
+    const [clicked, setClicked] = useState(false)
+    const [btnClicked, setBtnClicked] = useState(false)
+    const { register, handleSubmit, formState:{errors}, reset } = useForm<IFormInput>()
+
 
     const onSubmit: SubmitHandler<IFormInput> = data => {
         reset();

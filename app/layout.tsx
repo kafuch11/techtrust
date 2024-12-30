@@ -1,7 +1,6 @@
-// 'use server'
 
 import type { Metadata } from "next";
-import { Share_Tech, Roboto } from "next/font/google";
+import {  Roboto } from "next/font/google";
 import "./globals.css";
 import Navbar from "./ui/components/Navbar";
 import Footer from "./ui/components/Footer";
@@ -12,11 +11,7 @@ const roboto = Roboto({
 
 })
 
-export const shareTech = Share_Tech({
-  weight : ['400'],
-  subsets : ['latin']
-  
-})
+
 
 
 

@@ -70,10 +70,10 @@ const SideBar = () => {
   const [selectedCategoryHidden, setSelectedCategoryHidden] = useState(true)
   const [selectedSort, setSelectedSort] = useState(1)
   const [selectedSortHidden, setSelectedSortHidden] = useState(true)
-  const [price, setPrice] = useState(0)
+  const [price, setPrice] = useState('0')
   const [priceTranslate, setPriceTranslate] = useState(false)
-  const [minPrice, setMinPrice] = useState(0);
-  const [maxPrice, setMaxPrice] = useState(10000);
+  const [minPrice, setMinPrice] = useState('0');
+  const [maxPrice, setMaxPrice] = useState('10000');
   const [selectedBrandHidden, setSelectedBrandHidden] = useState(true)
   const [selectedBrand, setSelectedBrand] = useState<Array<string>>([])
 

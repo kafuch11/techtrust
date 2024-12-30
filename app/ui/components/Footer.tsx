@@ -1,6 +1,12 @@
 import Copier from "./Copier"
-import { shareTech } from "@/app/layout"
+import { Share_Tech } from "next/font/google"
 import Image from "next/image"
+
+const shareTech = Share_Tech({
+    weight : ['400'],
+    subsets : ['latin']
+    
+  })
 
 const Footer = () => {
     return (
