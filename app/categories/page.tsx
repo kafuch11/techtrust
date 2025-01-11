@@ -2,7 +2,9 @@
 import Categories from "../ui/sections/Categories"
 
 
-const Page = () => {
+const Page = async () => {
+  
+
   return (
     <section className="w-full h-full">
         <Categories />

@@ -1,9 +1,11 @@
 import CatagoryCard from "../components/CatagoryCard"
+import { getCategory } from "@/actions/category"
 
-const url = process.env.BASE_URL
+
 
 const Categories = async () => {
-    const categories : Array<{name:string,image:string}> = await fetch(`${url}/api/user/products/categories`).then(res => res.json()).then(data => data.data)
+  let categories : Array<{name: string, image:string}> = []
+  getCategory().then(data => categories = data)
 
   return (
     <section className="min-h-[500px] space-c w-full ">
