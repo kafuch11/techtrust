@@ -1,9 +1,9 @@
 import CatagoryCard from "../components/CatagoryCard"
 
+const url = process.env.BASE_URL
 
 const Categories = async () => {
-    const url = process.env.NEXT_PUBLIC_API_URL
-    const categories : Array<{name:string,image:string}> = await fetch(`${url}/user/products/categories`).then(res => res.json()).then(data => data.data)
+    const categories : Array<{name:string,image:string}> = await fetch(`${url}/api/user/products/categories`).then(res => res.json()).then(data => data.data)
 
   return (
     <section className="min-h-[500px] space-c w-full ">
