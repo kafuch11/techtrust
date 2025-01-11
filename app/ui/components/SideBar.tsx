@@ -5,10 +5,15 @@ import { useState } from "react"
 
 
 const categoriesList = [
-  {
-    id: 1,
+   {
+    id: 0,
     name: 'All',
   },
+  {
+    id: 1,
+    name: 'Peripherals',
+  },
+  
   {
     id: 2,
     name: 'Computers',
@@ -21,10 +26,7 @@ const categoriesList = [
     id: 4,
     name: 'Phones',
   },
-  {
-    id: 5,
-    name: 'Peripherals',
-  },
+ 
 ]
 
 
@@ -63,19 +65,30 @@ const brandList = [
   },
 ]
 
+interface SideBarProps {
+  selectedBrand: Array<string>
+  setSelectedBrand: React.Dispatch<React.SetStateAction<Array<string>>>
+  minPrice: string
+  setMinPrice: React.Dispatch<React.SetStateAction<string>>
+  maxPrice: string
+  setMaxPrice: React.Dispatch<React.SetStateAction<string>>
+  selectedCategory: string
+  setSelectedCategory: React.Dispatch<React.SetStateAction<string>>
+}
+
+const SideBar = ({...params}: SideBarProps) => {
+
+  const {selectedBrand  , setSelectedBrand, minPrice,setMinPrice,maxPrice,setMaxPrice,selectedCategory,setSelectedCategory} = params
 
 
-const SideBar = () => {
-  const [selectedCategory, setSelectedCategory] = useState(1)
   const [selectedCategoryHidden, setSelectedCategoryHidden] = useState(true)
   const [selectedSort, setSelectedSort] = useState(1)
   const [selectedSortHidden, setSelectedSortHidden] = useState(true)
   const [price, setPrice] = useState('0')
-  const [priceTranslate, setPriceTranslate] = useState(false)
-  const [minPrice, setMinPrice] = useState('0');
-  const [maxPrice, setMaxPrice] = useState('10000');
+  const [priceTranslate, setPriceTranslate] = useState(true)
   const [selectedBrandHidden, setSelectedBrandHidden] = useState(true)
-  const [selectedBrand, setSelectedBrand] = useState<Array<string>>([])
+
+
 
 const deleteBrand = (id:number,arr: Array<string>) => {
   const newArr = arr.filter((_,index) => index !== id)
@@ -85,7 +98,7 @@ const deleteBrand = (id:number,arr: Array<string>) => {
 
 
   return (
-    <section className='w-64 bg-[#030303] border-r border-black_grad_e h-screen md:flex hidden absolute z-0 top-0 left-0  flex-col justify-start items-start p-4 gap-4 '>
+    <section className='w-64 bg-[#030303] border-r border-black_grad_e h-screen flex     flex-col justify-start items-start p-4 gap-4 '>
       <div className='border-solid bottom-2 border-b py-5 border-border_gray sidebar-inner flex justify-start items-center  gap-1'>
         <div className="h-10 w-10  rounded-full bg-black_grad_m">
           <Image src="/images/users/profile.png" height={20} width={20} alt="profile" className="h-full w-full object-cover rounded-full" />
@@ -100,11 +113,11 @@ const deleteBrand = (id:number,arr: Array<string>) => {
       <div className='sidebar-inner flex flex-col justify-evenly items-start gap-2 relative'>
         <h1 className="text-lg">Categories</h1>
         <div className="h-8 w-32  rounded-full flex items-center justify-between px-3 bg-deal_card_m cursor-pointer relative">
-          {categoriesList.map(({ id, name }) => id === selectedCategory && <span key={id} className="text-white">{name}</span>)}
+          {categoriesList.map(({ id, name }) => name === selectedCategory && <span key={id} className="text-white">{name}</span>)}
           <span className={`text-white ${selectedCategoryHidden ? '' : ' rotate-90 '}`} onClick={() => setSelectedCategoryHidden(prev => !prev)}><Image src={'/icons/go_right.svg'} height={16} width={16} alt="icons" /></span>
           <div className={`${selectedCategoryHidden ? ' hidden ' : ' flex '} flex-col absolute z-10 top-full  left-1/2 bg-white border border-border_gray   w-32 `}>
             {categoriesList.map(({ id, name }) => (
-              <span key={id} onClick={() => { setSelectedCategory(id); setSelectedCategoryHidden(true) }} className={`text-white w-full bg-[#ffffff] text-black_grad_s px-2 `}>{name}</span>
+              <span key={id} onClick={() => { setSelectedCategory(name); setSelectedCategoryHidden(true) }} className={`text-white w-full bg-[#ffffff] text-black_grad_s px-2 `}>{name}</span>
 
             ))}
           </div>
@@ -164,7 +177,7 @@ const deleteBrand = (id:number,arr: Array<string>) => {
         <h1 className="text-lg">Brands</h1>
         <div className="min-h-6 h-max p-2 w-full  rounded-lg flex items-center justify-between px-1 bg-[#ffffff11] border mt-1 cursor-pointer relative">
           <span className="text-white flex gap-1 flex-wrap">
-            {selectedBrand.length !== 0?selectedBrand.map(( name,id) =>  <div key={id}  className="text-white flex gap-2 h-full rounded-full border text-[10px] px-2"><p>{name}</p><span onClick={()=> { setSelectedBrand((e)=> deleteBrand(id,e))}}>x</span></div>):'All'}
+            {selectedBrand.length !== 0?selectedBrand?.map(( name,id) =>  <div key={id}  className="text-white flex gap-2 h-full rounded-full border text-[10px] px-2"><p>{name}</p><span onClick={()=> { setSelectedBrand((e)=> deleteBrand(id,e))}}>x</span></div>):'All'}
 
           </span>
           <span className="text-white" onClick={()=> setSelectedBrandHidden(prev => !prev)}>+</span>

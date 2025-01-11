@@ -1,10 +1,14 @@
 'use client'
 import Image from "next/image"
 import { useState, useEffect } from "react"
-import { featuredProducts } from "@/app/constants"
 
 
-const Product = ({translate} : {translate : number}) => {
+const url = process.env.NEXT_PUBLIC_API_URL as string
+
+
+const Product = ({translate,featuredProducts} : {translate : number,featuredProducts : Array<{id: number,name: string,description : string,price:number,image:string}>}) => {
+
+
     useEffect(() => {
       
     }, [translate])
@@ -39,15 +43,28 @@ const Product = ({translate} : {translate : number}) => {
 
 const Featured = () => {
     const [onScreen, setOnScreen] = useState(0);
+    const [featuredProducts, setFeaturedProducts] = useState<Array<{id: number,name: string,description : string,price:number,image:string}>>([]);
+    useEffect(() => {
+        const fetchPs = async ()=>{
+
+            const products = await fetch(`${url}/user/products/featured-products`).then(res => res.json()).then(data => data.data)
+            setFeaturedProducts(products)
+        }
+
+        fetchPs()
+
+      
+    }, [])
+    
 
 
     return (
-        <section className="w-full relative  space-c md:min-h-[90vh]">
+        <section className="w-full max-w-[100%] relative  space-c md:min-h-[90vh]">
             <div className="section-head">Featured</div>
             <div className="w-full h-max flex relative justify-center items-center">
                 <div onClick={() => setOnScreen(prev => prev == 0 ? 4 : prev - 1)} className="h-max w-fit relative  cursor-pointer"><Image src={'/icons/go_left.svg'} alt="left" height={100} width={100} /></div>
                 <div className="w-full relative min-h-[350px] max-h-max h-[50vh] flex  overflow-hidden">
-                        <Product translate={onScreen} />
+                        <Product translate={onScreen} featuredProducts={featuredProducts} />
                 </div>
                 <div onClick={() => setOnScreen(prev => prev == 4 ? 0 : prev + 1)} className="h-max w-fit cursor-pointer"><Image src={'/icons/go_right.svg'} alt="right" height={100} width={100} /></div>
             </div>

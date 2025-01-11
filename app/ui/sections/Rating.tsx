@@ -1,7 +1,7 @@
 'use client'
 
 import Image from "next/image"
-import {  useRef, useState } from "react"
+import { useRef, useState } from "react"
 import { rate } from "@/actions/rating"
 import { useForm, SubmitHandler } from "react-hook-form"
 
@@ -11,22 +11,20 @@ const Rating = () => {
 
     interface IFormInput {
         email: string;
-        
-      }
+    }
 
 
     const [rated, setRated] = useState(3)
     const realRating = useRef(0)
     const [clicked, setClicked] = useState(false)
     const [btnClicked, setBtnClicked] = useState(false)
-    const { register, handleSubmit, formState:{errors}, reset } = useForm<IFormInput>()
+    const { register, handleSubmit, formState: { errors }, reset } = useForm<IFormInput>()
 
 
-    const onSubmit: SubmitHandler<IFormInput> = data => {
+    const onSubmit: SubmitHandler<IFormInput> = async data => {
         reset();
         setBtnClicked(true)
-        rate(data.email,realRating.current)
-        
+        await rate(data.email, realRating.current)
     };
 
 
@@ -46,15 +44,24 @@ const Rating = () => {
             </div>
             <div className={` h-max w-full  ${btnClicked ? 'hidden' : 'flex'} justify-center items-center gap-3`}>
                 {[1, 2, 3, 4, 5].map((item) => (
-                    <Image onClick={() => handleRating(item)} onPointerEnter={() => clicked || setRated(item)} onPointerLeave={() => clicked || setRated(3)} key={item} className="h-[10vw] w-auto cursor-pointer" src={clicked ? (item <= realRating.current ? '/icons/filled_star.svg' : '/icons/hollow_star.svg') : (item <= rated ? '/icons/filled_star.svg' : '/icons/hollow_star.svg')} width={20} height={20} alt="stars" />
+                    <Image
+                        onClick={() => handleRating(item)}
+                        onPointerEnter={() => clicked || setRated(item)} onPointerLeave={() => clicked || setRated(3)}
+                        key={item}
+                        className="h-[10vw] w-auto cursor-pointer"
+                        src={clicked ? (item <= realRating.current ? '/icons/filled_star.svg' : '/icons/hollow_star.svg') : (item <= rated ? '/icons/filled_star.svg' : '/icons/hollow_star.svg')}
+                        width={20}
+                        height={20}
+                        alt="stars"
+                    />
                 ))}
             </div>
             <form onSubmit={handleSubmit(onSubmit)} className="flex justify-center items-center gap-3 flex-col">
 
-                <input type="email" {...register("email",{required:'Email Required'})} placeholder="Email..." className={`btn border-border_gray border-solid border-2 from-black_grad_s to-black_grad_m transition-all duration-300 ${clicked ? `${btnClicked && ' hidden '}` : ' hidden text-transparent bg-transparent from-transparent to-transparent '} `} />
+                <input type="email" {...register("email", { required: 'Email Required' })} placeholder="Email..." className={`btn border-border_gray border-solid border-2 from-black_grad_s to-black_grad_m transition-all duration-300 ${clicked ? `${btnClicked && ' hidden '}` : ' hidden text-transparent bg-transparent from-transparent to-transparent '} `} />
                 {errors.email?.type === 'required' && <p role="alert" className="text-sale_red">Email is required</p>}
 
-                <button  type="submit" className={`btn transition-all duration-300 ${clicked ? `${btnClicked && ' hidden '}` : ' hidden text-transparent bg-transparent from-transparent to-transparent '} `}>Confirm</button>
+                <button type="submit" className={`btn transition-all duration-300 ${clicked ? `${btnClicked && ' hidden '}` : ' hidden text-transparent bg-transparent from-transparent to-transparent '} `}>Confirm</button>
             </form>
             <div className={` h-max w-full md:text-2xl text-lg ${btnClicked ? 'flex' : 'hidden'} justify-center items-center gap-3`}>
                 Thanks For Rating Us!
