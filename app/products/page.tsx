@@ -28,9 +28,11 @@ const router = useSearchParams()
   
 
   useEffect(() => {
-    getProducts(selectedCategory, { min: parseInt(minPrice), max: parseInt(maxPrice) }, selectedBrand).then((data) => {
+    async function fetchData() {
+    await getProducts(selectedCategory, { min: parseInt(minPrice), max: parseInt(maxPrice) }, selectedBrand).then((data) => {
       setProducts(data)
-    })
+    })}
+    fetchData()
   
     
   }, [selectedCategory, minPrice, maxPrice, selectedBrand])

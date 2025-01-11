@@ -21,8 +21,8 @@ interface Product {
 const Page = async ({ params }: { params: Promise<{ id: number }> }) => {
     const url = process.env.NEXT_PUBLIC_API_URL;
     const id = (await params).id;
-    const product: Product = await fetch(`${url}/user/products/product?id=${id}`).then(res => res.json()).then(res => res.data)
-    const products: Array<Product> = await fetch(`${url}/user/products?category=${product.category}`).then(res => res.json()).then(res => res.data)
+    const product: Product = await fetch(`${url}/user/products/product?id=${id}`).then(res => res.json()).then(res => res.data).catch(err => { console.log(err); return null });
+    const products: Array<Product> = await fetch(`${url}/user/products?category=${product.category}`).then(res => res.json()).then(res => res.data).catch(err => { console.log(err); return [] });
     return (
         <section className="w-full h-full ">
             <div className="w-full min-h-96 grid grid-cols-2">

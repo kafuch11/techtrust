@@ -2,10 +2,9 @@ import CatagoryCard from "../components/CatagoryCard"
 import { getCategory } from "@/actions/category"
 
 
-
 const Categories = async () => {
   let categories : Array<{name: string, image:string}> = []
-  getCategory().then(data => categories = data)
+  await getCategory().then(data => categories = data)
 
   return (
     <section className="min-h-[500px] space-c w-full ">
