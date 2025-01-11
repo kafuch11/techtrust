@@ -1,13 +1,13 @@
 
 import Link from "next/link";
 import ProductCard from "../components/ProductCard"
+// import { getProducts } from "@/actions/products";
+import { products } from "@/app/constants";
 
 const Deals = async () => {
-    const url = process.env.NEXT_PUBLIC_API_URL as string
+// let products: Array<{ id: number, name: string; sale: number; price: number; expiry_date: string; image: string; discount: number; }> = []
 
-
-    const products: Array<{ id: number, name: string; sale: number; price: number; expiry_date: string; image: string; discount: number; }> = await fetch(`${url}/user/products`).then(res => res.json()).then(data => data.data)
-
+    // await getProducts('All', { min: 0, max: 10000 }, []).then((data) => products = data)
 
     return (
         <section className="space-c min-h-96 w-full">

@@ -13,7 +13,7 @@ export const getProducts = async (selectedCategory: string, priceRange: { min: n
         };
         Object.keys(params).forEach(key => newUrl.searchParams.append(key, params[key as keyof typeof params] ));
 
-        const response = await fetch(newUrl.toString()).then(res => res.json()).then(data => data.data);
+        const response = await fetch(newUrl.toString()).then(res => res.json()).then(data => data.data).catch(err => { console.log(err); return []} );
         return response;
 
     } catch (err) {

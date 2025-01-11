@@ -1,9 +1,9 @@
 'use client'
+import { getFeaturedProducts } from "@/actions/featured-products"
 import Image from "next/image"
 import { useState, useEffect } from "react"
 
 
-const url = process.env.NEXT_PUBLIC_API_URL as string
 
 
 const Product = ({translate,featuredProducts} : {translate : number,featuredProducts : Array<{id: number,name: string,description : string,price:number,image:string}>}) => {
@@ -46,9 +46,8 @@ const Featured = () => {
     const [featuredProducts, setFeaturedProducts] = useState<Array<{id: number,name: string,description : string,price:number,image:string}>>([]);
     useEffect(() => {
         const fetchPs = async ()=>{
-
-            const products = await fetch(`${url}/user/products/featured-products`).then(res => res.json()).then(data => data.data)
-            setFeaturedProducts(products)
+            await  getFeaturedProducts().then(products => setFeaturedProducts(products))
+            
         }
 
         fetchPs()

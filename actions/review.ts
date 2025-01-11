@@ -19,7 +19,7 @@ export const review = async (email:string,review: string) => {
 
 export const getReview = async () => {
     try {
-        const response = await fetch(`${url}/api/user/reviews`).then(res=>res.json()).then(data=>data.data)
+        const response = await fetch(`${url}/api/user/reviews`).then(res=>res.json()).then(data=>data.data).catch(err => { console.log(err); return []} );
        return response;
 
     } catch (err) {
