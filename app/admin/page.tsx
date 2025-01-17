@@ -1,4 +1,3 @@
-'use client'
 
 import Dashboard from "@/app/ui/sections/admin/Dashboard"
 

@@ -11,6 +11,6 @@ export const getFeaturedProducts = async () => {
 
     } catch (err) {
         console.error('Error fetching products:', err);
-        return null;
+        return [];
     }
 }

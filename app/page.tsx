@@ -6,9 +6,14 @@ import Reviews from "./ui/sections/Reviews";
 import NewsLetter from "./ui/sections/NewsLetter";
 import Rating from "./ui/sections/Rating";
 
+
 export default function Home() {
+  
   return (
-    <main >
+    <main className="relative h-max w-full">
+      
+      
+
       <Hero />
       <Featured/>
       <Deals />

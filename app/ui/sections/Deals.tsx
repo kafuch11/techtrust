@@ -1,14 +1,14 @@
 
-import Link from "next/link";
 import ProductCard from "../components/ProductCard"
 import { getProducts } from "@/actions/products";
+import ProductHandlers from "../components/ProductHandlers";
+import { Product } from "@/app/products/page";
 // import { products } from "@/app/constants";
 
 const Deals = async () => {
-let products: Array<{ id: number, name: string; sale: number; price: number; expiry_date: string; image: string; discount: number; }> = []
+let products: Array<Product> = []
 
     await getProducts('All', { min: 0, max: 10000 }, []).then((data) => products = data)
-
     return (
         <section className="space-c min-h-96 w-full">
 
@@ -21,7 +21,7 @@ let products: Array<{ id: number, name: string; sale: number; price: number; exp
                         <div key={item.id} className={` transition-all duration-500`}>
 
                             <ProductCard products={item} />
-                            <div className="flex my-4 px-2 justify-between items-center"><Link href={`/products/product/${item.id}`}><button className="btn">Buy Now</button></Link><button className="btn ">Add to Cart</button></div>
+                            <ProductHandlers item={item} />
                         </div>
 
                     ))}

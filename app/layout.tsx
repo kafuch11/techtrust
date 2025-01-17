@@ -6,6 +6,7 @@ import Navbar from "./ui/components/Navbar";
 import Footer from "./ui/components/Footer";
 import { ClerkProvider } from '@clerk/nextjs'
 import NextTopLoader from 'nextjs-toploader';
+import MainCartProvider from "@/components/providers/MainCartProvider";
 
 
 const roboto = Roboto({
@@ -30,14 +31,16 @@ export default function RootLayout({
 }>) {
   return (
     <ClerkProvider>
+      <MainCartProvider>
+
       <html lang="en">
         <body
           className={`${roboto.className} antialiased`}
           suppressHydrationWarning
-        >
+          >
           <NextTopLoader
             showSpinner={false}
-          />
+            />
 
           <header className="w-full sticky top-0 z-10">
 
@@ -52,6 +55,7 @@ export default function RootLayout({
           </footer>
         </body>
       </html>
+            </MainCartProvider>
     </ClerkProvider>
   );
 }

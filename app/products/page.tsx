@@ -9,13 +9,21 @@ import { getProducts } from "@/actions/products";
 import Image from "next/image";
 import { useSearchParams } from "next/navigation";
 import { Suspense } from "react";
-import Link from "next/link";
+import ProductHandlers from "../ui/components/ProductHandlers";
+// import Link from "next/link";
+
+
+export interface Product {
+  id:number,description:string,name: string, sale: number, price: number, expiry_date: string, image: string, discount:number
+}
+
+
 
 const Page =  () => {
 
 const router = useSearchParams()
   const  category  = router.get('category');
-  const [products, setProducts] = useState<Array<{id:number,name: string, sale: number, price: number, expiry_date: string, image: string, discount:number}>>([]);
+  const [products, setProducts] = useState<Array<Product>>([]);
   const [selectedBrand, setSelectedBrand] = useState<Array<string>>([])
   const [show, setShow] = useState(true)
   const [showFilter, setShowFilter] = useState(false)
@@ -90,7 +98,8 @@ const router = useSearchParams()
             <div key={item.id} className={` transition-all duration-500 `}>
 
               <ProductCard products={item} />
-              <div className="flex my-4 px-2 justify-between items-center"><Link href={`/products/product/${item.id}`}><button className="btn">Buy Now</button></Link><button className="btn ">Add to Cart</button></div>
+              <ProductHandlers item={item}/>
+              {/* <div className="flex my-4 px-2 justify-between items-center"><Link href={`/products/product/${item.id}`}><button className="btn">Buy Now</button></Link><button className="btn ">Add to Cart</button></div> */}
             </div>
 
 ))

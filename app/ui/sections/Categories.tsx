@@ -4,7 +4,13 @@ import { getCategory } from "@/actions/category"
 
 const Categories = async () => {
   let categories : Array<{name: string, image:string}> = []
-  await getCategory().then(data => categories = data)
+  try{
+
+    await getCategory().then(data => categories = data)
+  }catch(err){
+    console.log(err)
+    categories = []
+  }
 
   return (
     <section className="min-h-[500px] space-c w-full ">

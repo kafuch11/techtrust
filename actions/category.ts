@@ -12,6 +12,6 @@ export const getCategory = async () => {
 
     } catch (err) {
         console.error('Error fetching products:', err);
-        return null;
+        return [];
     }
 }

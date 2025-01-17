@@ -18,6 +18,6 @@ export const getProducts = async (selectedCategory: string, priceRange: { min: n
 
     } catch (err) {
         console.error('Error fetching products:', err);
-        return null;
+        return [];
     }
 }

@@ -24,6 +24,7 @@ export const getReview = async () => {
 
     } catch (err) {
         console.error('Error writing file:', err);
+        return []
     }
 }
 
