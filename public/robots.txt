@@ -1,0 +1,13 @@
+User-agent: *
+Disallow: /admin/
+Disallow: /account/
+Disallow: /checkout/
+Disallow: /cart/
+Disallow: /search/
+Allow: /public/
+Allow: /images/
+Allow: /css/
+Allow: /js/
+Allow: /products/
+
+Sitemap: https://techtrust-ochre.vercel.app/sitemap.xml
